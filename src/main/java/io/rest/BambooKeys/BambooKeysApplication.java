@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+
 import io.rest.BambooKeys.service.InitializationTest;
 
 @SpringBootApplication
@@ -25,6 +26,7 @@ public class BambooKeysApplication {
 		return (evt)->{
 			
 			initializationTest.initUserDB();
+
 		};
 	}
 }
