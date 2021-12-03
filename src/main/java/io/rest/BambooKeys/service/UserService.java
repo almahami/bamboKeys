@@ -57,7 +57,7 @@ public class UserService {
                 user.setAdress(newUser.getAdress());
                 user.setSalutation(newUser.getSalutation());
               
-                log.info("new Camaign" + user);
+                log.info("new User" + user);
                 return userRepository.save(user);
         })
         

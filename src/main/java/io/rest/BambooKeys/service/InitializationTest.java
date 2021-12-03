@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import io.rest.BambooKeys.entity.Adress;
 import io.rest.BambooKeys.entity.User;
 import io.rest.BambooKeys.enum_.salutation;
-import io.rest.BambooKeys.repository.UserRepository;
 
 @Service
 public class InitializationTest {
@@ -19,8 +18,8 @@ public class InitializationTest {
     private Adress maxAdress = new Adress();
    
     @Autowired
-    private UserRepository userRepository;
-
+    private UserService userService;
+    
     @Autowired
     public InitializationTest(Logger log){
         this.log=log;
@@ -39,9 +38,9 @@ public class InitializationTest {
        user.setAdress(maxAdress);
 
         //* save user and the Adress
-        userRepository.save(user);
-
-        log.info("save and flush user");
+        userService.addUSer(user);
+        userService.deletUSer(1L);
+        //log.info("save and flush user");
 
     }
 }

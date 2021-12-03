@@ -23,6 +23,17 @@ public class User extends BaseEntity<Long> {
     public User() {
     }
 
+    
+    public User(String firstname, String lastname, String e_mail, Adress adress,
+            io.rest.BambooKeys.enum_.salutation salutation) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.e_mail = e_mail;
+        this.adress = adress;
+        this.salutation = salutation;
+    }
+
+
     public String getFirstname() {
         return firstname;
     }
