@@ -10,6 +10,8 @@ public class Product extends BaseEntity<Long>{
     private String name;
     private String descrpetion;
     private double price;
+    private int amount;
+
     
     public Product() {
     }
@@ -38,6 +40,15 @@ public class Product extends BaseEntity<Long>{
         this.price = price;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    
     
 
 }
