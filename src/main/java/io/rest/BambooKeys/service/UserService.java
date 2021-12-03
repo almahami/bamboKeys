@@ -69,7 +69,7 @@ public class UserService {
         Optional<User> res = userRepository.findById(id);
 
         if (res.isPresent()){
-            log.warn("Delte the user");
+            log.warn("Delete the user");
             userRepository.deleteById(id);
         }
         else{

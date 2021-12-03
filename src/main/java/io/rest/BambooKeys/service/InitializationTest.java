@@ -1,6 +1,5 @@
 package io.rest.BambooKeys.service;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import io.rest.BambooKeys.enum_.salutation;
 @Service
 public class InitializationTest {
     
-    private Logger log;
+    
     
     private User  user = new User();
 
@@ -20,10 +19,7 @@ public class InitializationTest {
     @Autowired
     private UserService userService;
     
-    @Autowired
-    public InitializationTest(Logger log){
-        this.log=log;
-    }
+   
     public void initUserDB(){
         
         user.setLastname("Mueller");
@@ -40,7 +36,7 @@ public class InitializationTest {
         //* save user and the Adress
         userService.addUSer(user);
         userService.deletUSer(1L);
-        //log.info("save and flush user");
+       
 
     }
 }
