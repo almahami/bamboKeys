@@ -2,7 +2,8 @@
 
 ## h2 config in build.gradle 
 
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+## mariaDB
+runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 ## get all users
 curl localhost:8080/users
@@ -19,6 +20,23 @@ curl -X PUT localhost:8080/user/4 -H'content-type:application/json' -d'{"firstna
 
 curl -X DELETE localhost:8080/user/1
 
+
+## get products
+curl localhost:8080/products
+
+## get product with id 
+curl -X GET localhost:8080/product/4
+## add product
+//??? take the value null
+curl -X POST localhost:8080/product -H'content-type:application/json' -d'{"name":"key","marke":"VW","descrpetion":"schlussel","amount": 2, "price": 50.99}'
+
+## update product with id 
+
+## Delete product with id 
+curl -X DELETE localhost:8080/product/1
+
+## Delete all Products
+curl -X DELETE localhost:8080/products
 
 ## swagger ui
  http://localhost:8080/swagger-ui/index.html 
