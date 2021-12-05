@@ -23,7 +23,7 @@ public class UserService {
     }
 
     // List All user
-    public List<User> getUser(){
+    public List<User> getUsers(){
         log.info("get all user" +  userRepository.findAll());
         return userRepository.findAll();
     }
@@ -41,7 +41,7 @@ public class UserService {
     public User addUSer(User user){
         User newUser = userRepository.save(user);
         log.info("Saved user with id" + newUser.getId());
-        log.info("user saved" + newUser);
+        log.info("user saved" + newUser.toString());
         return newUser;
     }
 
@@ -57,7 +57,7 @@ public class UserService {
                 user.setAdress(newUser.getAdress());
                 user.setSalutation(newUser.getSalutation());
               
-                log.info("new User" + user);
+                log.info("new User" + user.toString());
                 return userRepository.save(user);
         })
         
@@ -75,5 +75,13 @@ public class UserService {
         else{
             throw new UserNotfoundException(id);
         }
+    }
+
+    public void deleteALLUser(){
+        List<User> result = userRepository.findAll();
+        if (result.isEmpty()) throw new UserNotfoundException("dose not found any User "); 
+        
+        log.warn("Delete ALL user ");
+        userRepository.deleteAll();
     }
 }

@@ -75,6 +75,14 @@ public class User extends BaseEntity<Long> {
         this.salutation = salutation;
     }
 
+
+    @Override
+    public String toString() {
+        return "User [adress=" + adress + ", e_mail=" + e_mail + ", firstname=" + firstname + ", lastname=" + lastname
+                + ", salutation=" + salutation + "]";
+    }
+
+    
 }
 
 

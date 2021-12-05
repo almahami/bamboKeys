@@ -8,6 +8,7 @@ import io.rest.BambooKeys.common.BaseEntity;
 public class Product extends BaseEntity<Long>{
     
     private String name;
+    private String marke;
     private String descrpetion;
     private double price;
     private int amount;
@@ -46,6 +47,20 @@ public class Product extends BaseEntity<Long>{
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getMarke() {
+        return marke;
+    }
+
+    public void setMarke(String marke) {
+        this.marke = marke;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [amount=" + amount + ", descrpetion=" + descrpetion + ", marke=" + marke + ", name=" + name
+                + ", price=" + price + "]";
     }
 
     

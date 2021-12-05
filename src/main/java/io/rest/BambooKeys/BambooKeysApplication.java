@@ -26,6 +26,7 @@ public class BambooKeysApplication {
 		return (evt)->{
 			
 			initializationTest.initUserDB();
+			initializationTest.initProductDB();
 
 		};
 	}
