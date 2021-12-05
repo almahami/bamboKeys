@@ -45,9 +45,9 @@ public class UserController {
         userService.deletUSer(id);
     }
 
-   // @DeleteMapping("/users")
-    //public void deleteAllUSer(){
-   //     UserService.deleteAllUser();
-    //}
+    @DeleteMapping("/users")
+    public void deleteAllUSer(){
+       userService.deleteAllUser();
+    }
 
 }
