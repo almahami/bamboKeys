@@ -15,8 +15,8 @@ import io.rest.BambooKeys.repository.UserRepository;
 public class UserService {
     
     @Autowired
-    private UserRepository userRepository;
-    private Logger log;
+    private  UserRepository userRepository;
+    private  Logger log;
 
     public UserService(Logger log){
         this.log = log;
@@ -77,7 +77,7 @@ public class UserService {
         }
     }
 
-    public void deleteALLUser(){
+    public  void deleteAllUser(){
         List<User> result = userRepository.findAll();
         if (result.isEmpty()) throw new UserNotfoundException("dose not found any User "); 
         
