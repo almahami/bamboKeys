@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+
+    code {
+      font-family: MyFancyCustomFont, monospace;
+      font-size: inherit;
+    }
+
+
+    p>code,
+    li>code,
+    dd>code,
+    td>code {
+      background: #ffeff0;
+      word-wrap: break-word;
+      box-decoration-break: clone;
+      padding: .1rem .3rem .2rem;
+      border-radius: .2rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>BambooKeys</h1>
+
+  <h2>Users</h2>
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>POST</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>DELETE</th>
+    </tr>
+    <tr>
+      <td>/users</td>
+      <td>Nutzer anlegen</td>
+      <td>Alle Nutzer auflisten</td>
+      <td>Alle Nutzer aktualisieren</td>
+      <td>Alle Nutzer löschen</td>
+    </tr>
+    <tr>
+      <td>/users/&#x3C;id&#x3E;</td>
+      <td>Fehler (nicht erlaubt)</td>
+      <td>Nutzer mit Id=&#x3C;id&#x3E; anzeigen</td>
+      <td>Nutzer mit Id=&#x3C;id&#x3E; aktualisieren</td>
+      <td>Nutzer mit Id=&#x3C;id&#x3E; löschen</td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th>firstname</th>
+      <th>lastname</th>
+      <th>email</th>
+      <th>address</th>
+      <th>password</th>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td>Mustermann</td>
+      <td>max.mustermann@gmail.com</td>
+      <td>Muster Straße 1</td>
+      <td>1234</td>
+    </tr>
+  </table>
+  <code>
+    Beschreibung: Stammdaten der Kunden<br>
+    Anfrage: GET /users/1<br>
+    Antwort: [{url: "https://bambookeys.de/users/1", firstname:"Max", lastname:"Mustermann", email:"max.mustermann@gmail.com", address:"Duisburger Straße 100", password:"123"}]<br>
+  </code>
+
+  <!------------------>
+  <hr></hr>
+  <h2>Products</h2>
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>POST</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>DELETE</th>
+    </tr>
+    <tr>
+      <td>/products</td>
+      <td>Produkte anlegen</td>
+      <td>Alle Produkte auflisten</td>
+      <td>Alle Produkte aktualisieren</td>
+      <td>Alle Produkte löschen</td>
+    </tr>
+    <tr>
+      <td>/products/&#x3C;id&#x3E;</td>
+      <td>Fehler (nicht erlaubt)</td>
+      <td>Produkte mit Id=&#x3C;id&#x3E; anzeigen</td>
+      <td>Produkte mit Id=&#x3C;id&#x3E; aktualisieren</td>
+      <td>Produkte mit Id=&#x3C;id&#x3E; löschen</td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th>name</th>
+      <th>brand</th>
+      <th>new-price</th>
+      <th>old-price</th>
+    </tr>
+    <tr>
+      <td>Tastatur</td>
+      <td>BambooKeys</td>
+      <td>98.99</td>
+      <td>119.99</td>
+    </tr>
+  </table>
+  <code>
+    Beschreibung: Produktdaten<br>
+    Anfrage: GET /products/1<br>
+    Antwort: [{url: "https://bambookeys.de/products/1", name:"Tastatur", brand:"BambooKeys", new-price:"98.99", old-price:"119.99"}]<br>
+  </code>
+
+  <!------------------>
+  <hr></hr>
+  <h2>Questions</h2>
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>POST</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>DELETE</th>
+    </tr>
+    <tr>
+      <td>/questions</td>
+      <td>Anfrage anlegen</td>
+      <td>Alle Anfragen auflisten</td>
+      <td>Alle Anfragen aktualisieren</td>
+      <td>Alle Anfragen löschen</td>
+    </tr>
+    <tr>
+      <td>/questions/&#x3C;id&#x3E;</td>
+      <td>Fehler (nicht erlaubt)</td>
+      <td>Anfrage mit Id=&#x3C;id&#x3E; anzeigen</td>
+      <td>Anfrage mit Id=&#x3C;id&#x3E; aktualisieren</td>
+      <td>Anfrage mit Id=&#x3C;id&#x3E; löschen</td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th>firstname</th>
+      <th>lastname</th>
+      <th>email</th>
+      <th>subject</th>
+      <th>category</th>
+      <th>customer-id</th>
+      <th>description</th>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td>Mustermann</td>
+      <td>musterm@mail.com</td>
+      <td>Defektes Produkt</td>
+      <td>Retoure</td>
+      <td>1</td>
+      <td>Mein Produkt ist leider defekt!</td>
+    </tr>
+  </table>
+  <code>
+    Beschreibung: Kontaktformular<br>
+    Anfrage: GET /questions<br>
+    Antwort: [{url: "https://bambookeys.de/questions/", firstname:"Max", lastname:"Mustermann", email:"musterm@mail.com", subject:"Defektes Produkt", category:"Retoure", customer-id:"1", description:"Mein Produkt ist leider defekt!"}]<br>
+  </code>
+  <!------------------>
+  <hr></hr>
+  <h2>Reviews</h2>
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>POST</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>DELETE</th>
+    </tr>
+    <tr>
+      <td>/reviews</td>
+      <td>Rezension anlegen</td>
+      <td>Alle Rezensionen auflisten</td>
+      <td>Alle Rezensionen aktualisieren</td>
+      <td>Alle Rezensionen löschen</td>
+    </tr>
+    <tr>
+      <td>/reviews/&#x3C;id&#x3E;</td>
+      <td>Fehler (nicht erlaubt)</td>
+      <td>Rezension mit Id=&#x3C;id&#x3E; anzeigen</td>
+      <td>Rezension mit Id=&#x3C;id&#x3E; aktualisieren</td>
+      <td>Rezension mit Id=&#x3C;id&#x3E; löschen</td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th>publisher</th>
+      <th>star-rating</th>
+      <th>text</th>
+    </tr>
+    <tr>
+      <td>Max Mustermann</td>
+      <td>5</td>
+      <td>Example Review Text</td>
+    </tr>
+  </table>
+  <code>
+    Beschreibung: Rezensiondaten<br>
+    Anfrage: GET /reviews/1<br>
+    Antwort: [{url: "https://bambookeys.de/reviews/1", publisher:"Max Mustermann", star-rating:"5", text:"Example Review Text"}]<br>
+  </code>
+
+  <!------------------>
+<hr></hr>
+  <h2>Orders</h2>
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>POST</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>DELETE</th>
+    </tr>
+    <tr>
+      <td>/orders</td>
+      <td>Bestellung anlegen</td>
+      <td>Alle Bestellungen auflisten</td>
+      <td>Alle Bestellungen aktualisieren</td>
+      <td>Alle Bestellungen löschen</td>
+    </tr>
+    <tr>
+      <td>/orders/&#x3C;id&#x3E;</td>
+      <td>Fehler (nicht erlaubt)</td>
+      <td>Bestellung mit Id=&#x3C;id&#x3E; anzeigen</td>
+      <td>Bestellung mit Id=&#x3C;id&#x3E; aktualisieren</td>
+      <td>Bestellung mit Id=&#x3C;id&#x3E; löschen</td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>date</th>
+      <th>payment</th>
+      <th>total</th>
+    </tr>
+    <tr>
+      <td>001234</td>
+      <td>01-01-2021</td>
+      <td>Paypal</td>
+      <td>100.99</td>
+    </tr>
+  </table>
+  <code>
+    Beschreibung: Bestelldaten<br>
+    Anfrage: GET /orders/1<br>
+    Antwort: [{url: "https://bambookeys.de/orders/1", id:"001234", date:"01-01-2021", payment:"Paypal", total:"100.99"}]<br>
+  </code>
+
+</body>
+</html>
