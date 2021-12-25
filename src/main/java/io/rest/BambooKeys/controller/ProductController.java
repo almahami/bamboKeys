@@ -29,7 +29,8 @@ public class ProductController {
     public Product getProduct(@PathVariable Long id){
         return productService.getProduct(id);
     }
-
+    //!toDo: it is send empty product to the productService and saved object with null values
+    //??
     @PostMapping("/product")
     public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);
