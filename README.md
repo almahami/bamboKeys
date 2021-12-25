@@ -33,5 +33,9 @@ curl -X POST localhost:8080/product -H'content-type:application/json' -d'{"name"
 curl -X DELETE localhost:8080/product/1
 ## Delete all Products
 curl -X DELETE localhost:8080/products
+
+## Cart getMyCart
+ curl -X GET localhost:8080/user/4
+
 ## swagger ui
 http://localhost:8080/swagger-ui/index.html 

@@ -1,11 +1,8 @@
 package io.rest.BambooKeys.entity;
 
-import java.util.LinkedList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
 
 import io.rest.BambooKeys.common.BaseEntity;
@@ -13,41 +10,41 @@ import io.rest.BambooKeys.common.BaseEntity;
 @Entity
 public class Cart extends BaseEntity<Long> {
 
-    private int quanty;
-    @OneToMany
-    private List<Product> items = new LinkedList<>();
-    //** Only PERSIST, because we want to keep customer data in db when deleting cart
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private User user;
-
+    private Long userFK;
+    private Long ProductFK;
+    private int quantity;
+    
+   
+   
     public Cart(){
 
     }
 
-    public void setQuanty(int quanty) {
-        this.quanty = quanty;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public int getQuanty() {
-        return quanty;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public List<Product> getItems() {
-        return items;
+    public Long getUserFK() {
+        return userFK;
     }
 
-    public void setItems(List<Product> items) {
-        this.items = items;
+    public void setUserFK(Long userFK) {
+        this.userFK = userFK;
     }
 
-    public User getUser() {
-        return user;
+    public Long getProductFK() {
+        return ProductFK;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setProductFK(Long productFK) {
+        ProductFK = productFK;
     }
-    
-    
+
+   
+
 
 }

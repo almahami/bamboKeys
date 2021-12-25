@@ -41,7 +41,7 @@ public class InitializationTest {
         userService.addUser(user);
         userService.getUsers();
         userService.getUser(1L);
-        userService.deletUSer(1L);
+       // userService.deletUSer(1L);
         //userService.deleteALLUser();
     }
 
@@ -73,12 +73,16 @@ public class InitializationTest {
         //productService.deleteProduct(2L);
         //productService.deleteALLProduct();
 
+        
+      
        
+       cartService.addItemToCart(2, 1L, product.getId());
+        //Cascade sorgt dafür auch, dass item abgespeichert werden
+
     }
 
     public void initCart(){
-        Cart cart = new Cart();
-        //cart.setQuantiy(12);
-        //cartService.addCart(cart);
+       
+        
     }
 }
