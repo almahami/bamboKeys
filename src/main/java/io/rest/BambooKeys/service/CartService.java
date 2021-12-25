@@ -32,6 +32,16 @@ public class CartService {
     public CartService(Logger log){
         this.log= log;
     }
+   
+    public Cart getMyCart (Long userFK){
+        Optional<Cart> res= cartRepository.findCartByUserFK(userFK);
+        if(res.isPresent()){
+            return cartRepository.findCartByUserFK(userFK).get();
+        }
+        else{
+            throw new UserNotfoundException();
+        }
+    }
 
     // !! i don not have a login webepage, so i should define whcih user add item
     // to him / her Cart
@@ -39,6 +49,7 @@ public class CartService {
         Optional<User> userRes = userRepository.findById(userId);
         if (userRes.isPresent()) {
             Optional<Product> res = productRepository.findById(productId);
+            
             if (res.isPresent()) {
                 log.info("product with id " + productId + " will be added to the cart");
                 log.info("added product " + res.get() + "to the cart");
@@ -60,32 +71,5 @@ public class CartService {
 
     }
 
-    public Cart getMyCart (Long userFK){
-        Optional<Cart> res= cartRepository.findCartByUserFK(userFK);
-        if(res.isPresent()){
-            return cartRepository.findCartByUserFK(userFK).get();
-        }
-        else{
-            throw new UserNotfoundException();
 
-        }
-
-    }
- /*
-    public Cart getMyCart (Long userId){
-       Optional<Cart> res= cartRepository.FIN(userId);
-
-       if(res.isEmpty()){
-           log.info("result is empty");
-           throw new UserNotfoundException("User does not found");
-       }
-       else{
-           return cartRepository.findCartById(userId);
-       }
-    }
-
-    public void addProductToCart(String username, String productName){
-        
-    }
-*/
 }
