@@ -37,10 +37,22 @@ public class UserService {
         return res.get();
     }
 
+    // find user with name
+    public List<User> getUserWithName(String firstname){
+        List<User> res = userRepository.findByFirstname(firstname);
+        
+        if (!res.isEmpty()){
+            
+            return userRepository.findByFirstname(firstname);
+        }
+        else{
+            throw new UserNotfoundException("useer with name " + firstname + "not foud");
+        }
+    }
+
     // Create a new User
     public User addUser(User user){
         User newUser = userRepository.save(user);
-        log.info("++++++++++++++++++++user++++++++++++++" + user.toString());
         log.info("Saved user with id" + newUser.getId());
         log.info("user saved" + newUser.toString());
         return newUser;

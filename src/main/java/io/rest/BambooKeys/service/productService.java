@@ -1,4 +1,4 @@
-package io.rest.BambooKeys.service;
+ package io.rest.BambooKeys.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +26,30 @@ public class ProductService {
     public List<Product> getProducts(){
         return productRepository.findAll();
     } 
+
+    public List<Product> findProductWithName(String productName){
+        List<Product> res = productRepository.findByProductName(productName);
+
+        if(res.isEmpty()){
+            log.info("Product: " + productName +" not Found");
+            throw new ProductException("Can not found any Product with name: " + productName);
+        }
+        else{
+            return productRepository.findByProductName(productName);
+        }
+    }
+
+    public Optional<Product> findProductWithNameAndMarke(String productName, String productMarke){
+        Optional<Product> res = productRepository.findByproductNameAndMarke(productName, productMarke);
+
+        if(res.isEmpty()){
+            log.info("Product: " + productName + "Marke: " + productMarke +" not Found");
+            throw new ProductException("Can not found any Product with name:  " + productName + ", Marke:"  + productMarke);
+        }
+        else{
+            return productRepository.findByproductNameAndMarke(productName, productMarke);
+        }
+    }
 
     public Product getProduct(Long id){
         Optional<Product> result= productRepository.findById(id);

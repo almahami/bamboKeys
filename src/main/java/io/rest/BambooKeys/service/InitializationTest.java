@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.Adress;
+import io.rest.BambooKeys.entity.Cart;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.entity.User;
 import io.rest.BambooKeys.enum_.salutation;
@@ -17,6 +18,9 @@ public class InitializationTest {
     @Autowired
     private ProductService productService;
    
+    @Autowired
+    private CartService cartService;
+
     public void initUserDB(){
         User  user = new User();
         user.setLastname("Mueller");
@@ -61,7 +65,8 @@ public class InitializationTest {
         product2.setAmount(10);
         product2.setPrice(50);
 
-        productService.replaceProduct(product2, 2L);
+        //productService.replaceProduct(product2, 2L);
+        productService.addProduct(product2); 
 
         productService.getProducts();
         productService.getProduct(2L);
@@ -69,5 +74,11 @@ public class InitializationTest {
         //productService.deleteALLProduct();
 
        
+    }
+
+    public void initCart(){
+        Cart cart = new Cart();
+        //cart.setQuantiy(12);
+        //cartService.addCart(cart);
     }
 }

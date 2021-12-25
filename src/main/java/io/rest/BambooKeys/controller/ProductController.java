@@ -1,6 +1,7 @@
 package io.rest.BambooKeys.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,8 +30,18 @@ public class ProductController {
     public Product getProduct(@PathVariable Long id){
         return productService.getProduct(id);
     }
-    //!toDo: it is send empty product to the productService and saved object with null values
-    //??
+
+    @GetMapping("/productWithName/{productName}")
+    public List<Product> getproductWithName(@PathVariable String productName){
+        return productService.findProductWithName(productName);
+    }
+
+    @GetMapping("/productWithNameAndMarke/{productName}/{productMarke}")
+    public Optional<Product> getproductWithNameAndMarke(@PathVariable String productName, @PathVariable String productMarke){
+        return productService.findProductWithNameAndMarke(productName, productMarke);
+    }
+
+    //!!: it is send empty product to the productService and saved object with null values
     @PostMapping("/product")
     public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);
