@@ -13,7 +13,6 @@ public class Product extends BaseEntity<Long>{
     private double price;
     private int amount;
 
-    
     public Product() {
     }
     

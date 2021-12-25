@@ -38,8 +38,9 @@ public class UserService {
     }
 
     // Create a new User
-    public User addUSer(User user){
+    public User addUser(User user){
         User newUser = userRepository.save(user);
+        log.info("++++++++++++++++++++user++++++++++++++" + user.toString());
         log.info("Saved user with id" + newUser.getId());
         log.info("user saved" + newUser.toString());
         return newUser;
@@ -69,8 +70,8 @@ public class UserService {
         Optional<User> res = userRepository.findById(id);
 
         if (res.isPresent()){
-            log.warn("Delete the user");
-            userRepository.deleteById(id);
+            log.warn("Delete the user with id " + id);
+            userRepository.deleteById(id); 
         }
         else{
             throw new UserNotfoundException(id);

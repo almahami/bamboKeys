@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.rest.BambooKeys.entity.Product;
-import io.rest.BambooKeys.service.productService;
+import io.rest.BambooKeys.service.ProductService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class ProductController {
     
     @Autowired
-    private productService productService;
+    private ProductService productService;
 
-    @GetMapping("products")
+    @GetMapping("/products")
     public List<Product> getProducts(){
         return productService.getProducts();
     }
 
-    @GetMapping("product/{id}")
+    @GetMapping("/product/{id}")
     public Product getProduct(@PathVariable Long id){
         return productService.getProduct(id);
     }
 
-    @PostMapping("product")
+    @PostMapping("/product")
     public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);
     }
 
-    @PutMapping("product/{id}")
+    @PutMapping("/product/{id}")
     public Product replaceProduct(@PathVariable Long id, @RequestBody Product product ){
         return productService.replaceProduct(product, id);
     }

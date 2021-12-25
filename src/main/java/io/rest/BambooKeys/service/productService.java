@@ -12,14 +12,14 @@ import io.rest.BambooKeys.exception.ProductException;
 import io.rest.BambooKeys.repository.ProductRepository;
 
 @Service
-public class productService {
+public class ProductService {
     
     private Logger log;
 
     @Autowired
     private ProductRepository productRepository;
 
-    public productService(Logger log){
+    public ProductService(Logger log){
         this.log=log;
     }
 
@@ -42,7 +42,8 @@ public class productService {
 
     public Product addProduct(Product product){
         Product newProduct = productRepository.save(product);
-        log.info("Save new Product" + newProduct.toString() + "with id " + newProduct.getId());
+        log.info("Saved user with id" + newProduct.getId());
+        log.info("user saved" + newProduct.toString());
         return newProduct;
     }
 
@@ -68,10 +69,10 @@ public class productService {
         Optional<Product> result= productRepository.findById(id);
         if(result.isEmpty()){
             log.warn(("can not Found Product with " + id));
-            throw new ProductException("can not Found Product with" + id);
+            throw new ProductException("can not Found Product with id: " + id);
         }
         else{
-            log.warn("delete product with" + id);
+            log.warn("delete product with id: " + id);
             productRepository.deleteById(id);
         }
     }
@@ -80,7 +81,7 @@ public class productService {
         List<Product> result = productRepository.findAll();
 
         if (result.isEmpty()) throw new ProductException("does not  Found any Product");
-        log.warn("Delte ALL Product ");
+        log.warn("Delete ALL Product!!! ");
         productRepository.deleteAll();
     }
 }

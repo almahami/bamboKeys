@@ -15,7 +15,7 @@ public class InitializationTest {
     private UserService userService;
     
     @Autowired
-    private productService productService;
+    private ProductService productService;
    
     public void initUserDB(){
         User  user = new User();
@@ -34,7 +34,7 @@ public class InitializationTest {
        user.setAdress(maxAdress);
 
         //* save user and the Adress
-        userService.addUSer(user);
+        userService.addUser(user);
         userService.getUsers();
         userService.getUser(1L);
         userService.deletUSer(1L);
@@ -66,7 +66,7 @@ public class InitializationTest {
         productService.getProducts();
         productService.getProduct(2L);
         //productService.deleteProduct(2L);
-        productService.deleteALLProduct();
+        //productService.deleteALLProduct();
 
        
     }

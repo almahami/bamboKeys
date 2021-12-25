@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/user")
     public User addUser(@RequestBody User user){
-        return userService.addUSer(user);
+        return userService.addUser(user);
     }
 
     @PutMapping("user/{id}")
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    public void deleteUSer(@PathVariable Long id){
+    public void deleteUser(@PathVariable Long id){
         userService.deletUSer(id);
     }
 
