@@ -8,6 +8,7 @@ import io.rest.BambooKeys.entity.OrderedItem;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.entity.User;
 import io.rest.BambooKeys.enum_.salutation;
+import io.rest.BambooKeys.repository.CartRepository;
 
 @Service
 public class InitializationTest {
@@ -20,6 +21,8 @@ public class InitializationTest {
    
     @Autowired
     private CartService cartService;
+    @Autowired 
+    private  CartRepository cartRepository;
 
     public void initUserDB(){
         User  user = new User();
@@ -80,7 +83,7 @@ public class InitializationTest {
         //Cascade sorgt dafür auch, dass item abgespeichert werden
         OrderedItem orderedItem  =new OrderedItem();
        // orderedItem.setOrederedItems(cartService.getMyCart(userService.getUser(1L));
-       
+      // cartService.checkout( cartRepository.findById(4L).get(), 1L);
     }
 
     public void initCart(){

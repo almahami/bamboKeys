@@ -2,31 +2,36 @@ package io.rest.BambooKeys.entity;
 
 
 
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+ import javax.persistence.OneToOne;
 
 import io.rest.BambooKeys.common.BaseEntity;
 
 @Entity
 public class OrderedItem extends BaseEntity<Long> {
     
-    @OneToOne
-    @JoinColumn(name="userFK")
-    private User user;
-    @OneToOne 
-    private Cart cart;
-    
-   
 
+    private Date date;
+    private Long  userFK;
+    @ManyToMany 
+    private List<Product> products = new LinkedList<>();
     private int quantity;
     
-
     public OrderedItem() {
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserFK() {
+        return userFK;
+    }
+
+    public void setUserFK(Long userFK) {
+        this.userFK = userFK;
     }
 
     public int getQuantity() {
@@ -37,23 +42,19 @@ public class OrderedItem extends BaseEntity<Long> {
         this.quantity = quantity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public Cart getCart() {
-        return cart;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public Date getDate() {
+        return date;
     }
 
-   
-
-    
-    
-
-
-
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

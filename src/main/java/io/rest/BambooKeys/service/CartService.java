@@ -1,6 +1,8 @@
 package io.rest.BambooKeys.service;
 
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.Cart;
+import io.rest.BambooKeys.entity.Ordered;
+import io.rest.BambooKeys.entity.OrderedItem;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.entity.User;
 import io.rest.BambooKeys.exception.CartExcpetion;
 import io.rest.BambooKeys.exception.ProductException;
 import io.rest.BambooKeys.exception.UserNotfoundException;
 import io.rest.BambooKeys.repository.CartRepository;
+import io.rest.BambooKeys.repository.OrderedRepository;
 import io.rest.BambooKeys.repository.ProductRepository;
 import io.rest.BambooKeys.repository.UserRepository;
 
@@ -28,6 +33,8 @@ public class CartService {
     private ProductRepository productRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private OrderedRepository orderedRepository;
 
     public CartService(Logger log) {
         this.log = log;
@@ -124,6 +131,36 @@ public class CartService {
         } else {
             throw new UserNotfoundException("user with id: " + userFk + " Not Found");
         }
+    }
+
+
+    public Ordered checkout(Cart cart, Long userFK){
+
+        Ordered ordered = new Ordered();
+        
+        ordered.setUserFK(cart.getUserFK());
+
+        List<Long> itemsId = cartRepository.getProductsByUserFK(userFK);
+        List<Product> itemList = productRepository.findAllById(itemsId);
+        List<OrderedItem> orderedItems = new LinkedList<>();
+
+        for(Product p : itemList){
+            OrderedItem oi= new OrderedItem();
+            oi.setDate(new Date());
+            oi.setQuantity(p.getAmount());
+            oi.setProducts(itemList);
+            oi.setUserFK(cartRepository.searchCartWithUserFK(userFK).get());
+           
+            orderedItems.add(oi);
+            
+        }
+        ordered.setOrdereditems(orderedItems);
+        ordered.setNumberOfItems(orderedItems.size());
+        ordered.setDate(new Date());
+        orderedRepository.save(ordered);
+
+        deleteCart(userFK);
+        return ordered;
     }
 
 }

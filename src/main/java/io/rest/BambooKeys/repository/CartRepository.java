@@ -1,6 +1,7 @@
 package io.rest.BambooKeys.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -18,6 +19,9 @@ public interface CartRepository extends JpaRepository<Cart,Long>  {
     @Modifying
     @Query("DELETE FROM cart WHERE ?1 = productFK")
     void deleteProductFromCart(Long productFK);
+
+    @Query("SELECT userFK FROM cart  where ?1 = userFK")
+    Optional<Long> searchCartWithUserFK(Long userFK);
     
 
 }
