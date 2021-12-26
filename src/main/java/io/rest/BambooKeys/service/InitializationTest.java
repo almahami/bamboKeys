@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.Adress;
 import io.rest.BambooKeys.entity.Cart;
+import io.rest.BambooKeys.entity.OrderedItem;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.entity.User;
 import io.rest.BambooKeys.enum_.salutation;
@@ -78,7 +79,9 @@ public class InitializationTest {
        
        cartService.addItemToCart(2, 1L, product.getId());
         //Cascade sorgt dafür auch, dass item abgespeichert werden
-
+        OrderedItem orderedItem  =new OrderedItem();
+       // orderedItem.setOrederedItems(cartService.getMyCart(userService.getUser(1L));
+       
     }
 
     public void initCart(){

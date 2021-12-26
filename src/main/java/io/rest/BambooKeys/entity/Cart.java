@@ -1,21 +1,15 @@
 package io.rest.BambooKeys.entity;
 
-
 import javax.persistence.Entity;
-
-import javax.persistence.OneToOne;
-
 import io.rest.BambooKeys.common.BaseEntity;
 
-@Entity
+@Entity(name = "cart")
 public class Cart extends BaseEntity<Long> {
 
     private Long userFK;
-    private Long ProductFK;
+    private Long productFK;
     private int quantity;
     
-   
-   
     public Cart(){
 
     }
@@ -37,14 +31,11 @@ public class Cart extends BaseEntity<Long> {
     }
 
     public Long getProductFK() {
-        return ProductFK;
+        return productFK;
     }
 
     public void setProductFK(Long productFK) {
-        ProductFK = productFK;
+       this.productFK = productFK;
     }
-
-   
-
 
 }
