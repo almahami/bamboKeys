@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.Adress;
-import io.rest.BambooKeys.entity.Cart;
 import io.rest.BambooKeys.entity.OrderedItem;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.entity.User;
