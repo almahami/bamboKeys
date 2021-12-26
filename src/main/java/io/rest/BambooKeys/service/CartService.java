@@ -33,42 +33,43 @@ public class CartService {
         this.log= log;
     }
    
-    public Cart getMyCart (Long userFK){
-        Optional<Cart> res= cartRepository.findCartByUserFK(userFK);
-        if(res.isPresent()){
-            return cartRepository.findCartByUserFK(userFK).get();
+    public List<Cart> getMyCart (Long userFK){
+        List<Cart> res= cartRepository.findCartByUserFK(userFK);
+        if(!res.isEmpty()){
+            return cartRepository.findCartByUserFK(userFK);
         }
         else{
-            throw new UserNotfoundException();
+            throw new UserNotfoundException("user with id " + userFK + "Not found");
         }
     }
 
-    // !! i don not have a login webepage, so i should define whcih user add item
-    // to him / her Cart
-    public void addItemToCart(int quantity, Long userId, Long productId) {
-        Optional<User> userRes = userRepository.findById(userId);
+    // !! i don not have a login webepage, so i should define which user add item
+    //!! to him / her Cart
+    public Cart addItemToCart(int quantity, Long userFK, Long productFK) {
+        Optional<User> userRes = userRepository.findById(userFK);
         if (userRes.isPresent()) {
-            Optional<Product> res = productRepository.findById(productId);
-            
+            Optional<Product> res = productRepository.findById(productFK);
             if (res.isPresent()) {
-                log.info("product with id " + productId + " will be added to the cart");
+                log.info("product with id " + productFK + " will be added to the cart");
                 log.info("added product " + res.get() + "to the cart");
-                
                 Cart cart = new Cart();
-                cart.setProductFK(res.get().getId());
-                cart.setUserFK(userRes.get().getId());
-                cart.setQuantity(quantity);
-                
+                if(quantity <= res.get().getAmount()){
+
+                    cart.setProductFK(res.get().getId());
+                    cart.setUserFK(userRes.get().getId());
+                    cart.setQuantity(quantity);
+                }else{
+                    throw new ProductException("the quantity it is not avalibale, please choesse quantity smaller then or equals to " + res.get().getAmount());
+                }
                 cartRepository.saveAndFlush(cart);
-            
+                return cart;
             } else {
-                log.info("Product with id: " + productId + " not Founded");
-                throw new ProductException("Product with id: " + productId + " not Founded");
+                log.info("Product with id: " + productFK + " not Founded");
+                throw new ProductException("Product with id: " + productFK + " not Founded");
             }
         } else {
-            throw new UserNotfoundException();
+            throw new UserNotfoundException("user with id: " + userFK + " Not Found");
         }
-
     }
 
 
