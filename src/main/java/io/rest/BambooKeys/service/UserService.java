@@ -97,4 +97,13 @@ public class UserService {
         log.warn("Delete ALL user ");
         userRepository.deleteAll();
     }
+
+    public Boolean isUserExisist(Long userFK){
+        Optional<User> res = userRepository.findById(userFK);
+        if(res.isPresent()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

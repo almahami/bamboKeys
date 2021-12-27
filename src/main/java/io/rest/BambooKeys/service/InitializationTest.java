@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import io.rest.BambooKeys.entity.Adress;
 import io.rest.BambooKeys.entity.OrderedItem;
 import io.rest.BambooKeys.entity.Product;
+import io.rest.BambooKeys.entity.Questions;
 import io.rest.BambooKeys.entity.User;
+import io.rest.BambooKeys.enum_.Category;
 import io.rest.BambooKeys.enum_.salutation;
 import io.rest.BambooKeys.repository.CartRepository;
 
@@ -23,6 +25,9 @@ public class InitializationTest {
     private  CartRepository cartRepository;
     @Autowired 
     private OrderedService orderedService;
+    @Autowired
+    private QuestionsService questionsService;
+
 
     public void initUserDB(){
         User  user = new User();
@@ -46,6 +51,7 @@ public class InitializationTest {
         userService.getUser(1L);
        // userService.deletUSer(1L);
         //userService.deleteALLUser();
+        
     }
 
     public void initProductDB(){
@@ -84,8 +90,39 @@ public class InitializationTest {
        cartService.checkout(1L);
     }
 
-    public void initCart(){
-       
+    public void initRequest(){
+        User  user = new User();
+        user.setLastname("lastname");
+        user.setFirstname("firstname");
+        user.setE_mail("lastname@gmail.com");
+        user.setSalutation(salutation.Mister);
+        
+        Adress maxAdress = new Adress();
+        
+        maxAdress.setCity("Reutlingen");
+        maxAdress.setStreet("Reutlinger str");
+        maxAdress.setPostCode(764312);
+        
+        
+       user.setAdress(maxAdress);
+
+        //* save user and the Adress
+        userService.addUser(user);
+        
+      
+
+        Questions questions = new Questions();
+        questions.setCategory(Category.RETOURE);
+        questions.setDescrpetion("descrpetion");
+        questions.setSubject("Defect");
+        questions.questionsWitUser(user);
+        Questions question1 = new Questions();
+        question1.setCategory(Category.RETOURE);
+        question1.setDescrpetion("descrpetion");
+        question1.setSubject("Defect");
+        question1.questionsWitUser(user);
+        questionsService.AddRequest(1L, questions);
+        questionsService.updateReuest(question1, 6L);
         
     }
 }

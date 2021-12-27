@@ -27,7 +27,7 @@ public class BambooKeysApplication {
 			
 			initializationTest.initUserDB();
 			initializationTest.initProductDB();
-
+			initializationTest.initRequest();
 		};
 	}
 }

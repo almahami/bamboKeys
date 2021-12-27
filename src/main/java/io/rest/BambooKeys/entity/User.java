@@ -1,10 +1,14 @@
 package io.rest.BambooKeys.entity;
 
+import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 
+import org.springframework.expression.spel.ast.QualifiedIdentifier;
 
 import io.rest.BambooKeys.common.BaseEntity;
 import io.rest.BambooKeys.enum_.salutation;
@@ -19,6 +23,8 @@ public class User extends BaseEntity<Long> {
     private Adress adress = new Adress();
     @Enumerated(EnumType.STRING)
     private salutation salutation;
+    @OneToMany(mappedBy = "user")
+    private List<Questions> questions;
     
     public User() {
     }
@@ -75,6 +81,18 @@ public class User extends BaseEntity<Long> {
         this.salutation = salutation;
     }
 
+    public List<Questions> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Questions> questions) {
+        this.questions = questions;
+    }
+
+    public User addQuestion(Questions question){
+        this.questions.add(question);
+        return this;
+    }
 
     @Override
     public String toString() {
