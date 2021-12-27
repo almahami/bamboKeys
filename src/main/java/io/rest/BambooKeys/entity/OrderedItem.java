@@ -7,13 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
- import javax.persistence.OneToOne;
 
 import io.rest.BambooKeys.common.BaseEntity;
 
-@Entity
+@Entity(name = "orderedItem")
 public class OrderedItem extends BaseEntity<Long> {
     
 

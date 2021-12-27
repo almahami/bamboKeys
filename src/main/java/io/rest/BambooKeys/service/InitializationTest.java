@@ -15,14 +15,14 @@ public class InitializationTest {
     
     @Autowired
     private UserService userService;
-    
     @Autowired
     private ProductService productService;
-   
     @Autowired
     private CartService cartService;
     @Autowired 
     private  CartRepository cartRepository;
+    @Autowired 
+    private OrderedService orderedService;
 
     public void initUserDB(){
         User  user = new User();
@@ -76,9 +76,6 @@ public class InitializationTest {
         //productService.deleteProduct(2L);
         //productService.deleteALLProduct();
 
-        
-      
-       
        cartService.addItemToCart(2, 1L, product.getId());
         //Cascade sorgt dafür auch, dass item abgespeichert werden
         OrderedItem orderedItem  =new OrderedItem();

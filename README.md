@@ -37,16 +37,17 @@ curl -X DELETE localhost:8080/products
 ## Cart getMyCart
  curl -X GET localhost:8080/myCart/1
 ## get Products my  Cart as List 
-    curl -X GET localhost:8080/listALLProductsMyCart/1
+curl -X GET localhost:8080/listALLProductsMyCart/1
 ## addItemToCart
 curl -X POST localhost:8080/addItemToCart/1/2/12
-
 ## Delete Product from Cart 
 curl -X DELETE localhost:8080/deleteProductFromCart/1/5 
 ## Delete the cart 
 curl -X DELETE localhost:8080/deleteCart/1
 ## checkout
 curl -X POST localhost:8080/checkout/1
+## Review user order
+curl -X GET localhost:8080/ordered/1
 ## swagger ui
 http://localhost:8080/swagger-ui/index.html 
 

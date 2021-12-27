@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import io.rest.BambooKeys.common.BaseEntity;
 import io.rest.BambooKeys.enum_.salutation;
 
-@Entity
+@Entity(name = "user")
 public class User extends BaseEntity<Long> {
     
     private String firstname;
