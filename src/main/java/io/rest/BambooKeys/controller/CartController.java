@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.rest.BambooKeys.entity.Cart;
+import io.rest.BambooKeys.entity.Ordered;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.service.CartService;
 
@@ -27,14 +28,12 @@ public class CartController {
     @GetMapping("/listALLProductsMyCart/{userFK}")
     public List<Product> getAllProductsmyCart(@PathVariable Long userFK){
         return cartService.getProductmyCart(userFK);
-
     }
 
 
     @PostMapping("/addItemToCart/{userFK}/{productFK}/{quantity}")
     public Cart addItemToCart(@PathVariable Long userFK, @PathVariable Long productFK, @PathVariable int quantity){
         return cartService.addItemToCart(quantity, userFK, productFK);
-
     }
 
     @DeleteMapping("/deleteCart/{userFK}")
@@ -45,5 +44,10 @@ public class CartController {
     @DeleteMapping("/deleteProductFromCart/{userFK}/{productFK}")
     public void deleteProductFromCart(@PathVariable Long userFK, @PathVariable Long productFK){
         cartService.deleteProductFromCart(userFK, productFK);
+    }
+
+    @PostMapping("/checkout/{userFK}")
+    public Ordered checkout(@PathVariable Long userFK){
+        return cartService.checkout(userFK);
     }
 }

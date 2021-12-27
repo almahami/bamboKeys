@@ -45,8 +45,9 @@ curl -X POST localhost:8080/addItemToCart/1/2/12
 curl -X DELETE localhost:8080/deleteProductFromCart/1/5 
 ## Delete the cart 
 curl -X DELETE localhost:8080/deleteCart/1
+## checkout
+curl -X POST localhost:8080/checkout/1
 ## swagger ui
 http://localhost:8080/swagger-ui/index.html 
 
 
-## test  

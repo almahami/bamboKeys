@@ -25,7 +25,7 @@ import io.rest.BambooKeys.repository.UserRepository;
 
 @Service
 public class CartService {
-
+    
     private Logger log;
     @Autowired
     private CartRepository cartRepository;
@@ -35,7 +35,9 @@ public class CartService {
     private UserRepository userRepository;
     @Autowired
     private OrderedRepository orderedRepository;
-
+    @Autowired
+    OrderedItemService orderedItemService;
+    
     public CartService(Logger log) {
         this.log = log;
     }
@@ -57,6 +59,16 @@ public class CartService {
         } else {
             throw new UserNotfoundException("user with id " + userFK + "Not found");
 
+        }
+    }
+
+    public boolean haveUserWithIdACart( Long userFK){
+        List<Cart> res = cartRepository.findCartByUserFK(userFK);
+        if (!res.isEmpty()) {
+            return true;
+        } else {
+            
+            throw new UserNotfoundException("user with id " + userFK + "Not found");
         }
     }
 
@@ -110,7 +122,7 @@ public class CartService {
     public void deleteCart(Long userFK) {
         List<Cart> cart = getMyCart(userFK);
         if (!cart.isEmpty()) {
-            cartRepository.deleteAll();
+            cartRepository.deleteCartByUserFK(userFK);
             log.warn("remove Cart for user with id " + userFK);
         } else {
             log.error("Cart is already empty " + userFK);
@@ -118,49 +130,87 @@ public class CartService {
         }
     }
 
-    public void deleteProductFromCart(Long userFk, Long productFK){
-        Optional<User> userRes = userRepository.findById(userFk);
+    public void deleteProductFromCart(Long userFK, Long productFK){
+        Optional<User> userRes = userRepository.findById(userFK);
         if(userRes.isPresent()){
             if(cartRepository.getProductsByUserFK(userRes.get().getId()).contains(productFK)){
                 log.warn("product with id" + productFK + " will be removed from the Cart ");
-                cartRepository.deleteProductFromCart(productFK);
+                cartRepository.deleteProductFromCart(productFK,userFK);
 
             }else{
                 throw new CartExcpetion("Product is not added to the Cart yet!");
             }
         } else {
-            throw new UserNotfoundException("user with id: " + userFk + " Not Found");
+            throw new UserNotfoundException("user with id: " + userFK + " Not Found");
         }
     }
 
-
-    public Ordered checkout(Cart cart, Long userFK){
-
-        Ordered ordered = new Ordered();
-        
-        ordered.setUserFK(cart.getUserFK());
-
+    
+    public Ordered checkout(Long userFK){
+        if(haveUserWithIdACart(userFK)){
         List<Long> itemsId = cartRepository.getProductsByUserFK(userFK);
+        Ordered ordered = new Ordered();
+        ordered.setUserFK(cartRepository.searchCartWithUserFK(userFK).get());
+        
+        
         List<Product> itemList = productRepository.findAllById(itemsId);
         List<OrderedItem> orderedItems = new LinkedList<>();
 
         for(Product p : itemList){
             OrderedItem oi= new OrderedItem();
             oi.setDate(new Date());
-            oi.setQuantity(p.getAmount());
+            oi.setQuantity(cartRepository.getQuantityForProduct(p.getId(),userFK));
             oi.setProducts(itemList);
             oi.setUserFK(cartRepository.searchCartWithUserFK(userFK).get());
-           
             orderedItems.add(oi);
+            log.info("add items to OrderedItems " + oi.getId());
+            orderedItemService.saveOrderedItem(userFK, oi);
             
         }
         ordered.setOrdereditems(orderedItems);
         ordered.setNumberOfItems(orderedItems.size());
         ordered.setDate(new Date());
+        log.info("Saved Order for user" + userFK + "at Time " + new Date());
         orderedRepository.save(ordered);
-
+        log.warn("Delete the Shop Cart for user with id " + userFK);
         deleteCart(userFK);
+        log.info("returend Orderd" + ordered.toString());
         return ordered;
+        }else{
+            throw new UserNotfoundException("user with id: " + userFK + " Not Found");
+        }
     }
 
+        // u
+    /*
+        public Ordered checkout(Cart cart, Long userFK){
+                
+            Ordered ordered = new Ordered();
+            ordered.setUserFK(cart.getUserFK());
+            List<Long> itemsId = cartRepository.getProductsByUserFK(userFK);
+            List<Product> itemList = productRepository.findAllById(itemsId);
+            List<OrderedItem> orderedItems = new LinkedList<>();
+    
+            for(Product p : itemList){
+                OrderedItem oi= new OrderedItem();
+                oi.setDate(new Date());
+                oi.setQuantity(p.getAmount());
+                oi.setProducts(itemList);
+                oi.setUserFK(cartRepository.searchCartWithUserFK(userFK).get());
+                orderedItems.add(oi);
+                log.info("add items to OrderedItems " + oi.getId());
+                orderedItemService.saveOrderedItem(userFK, oi);
+                            
+            }
+            ordered.setOrdereditems(orderedItems);
+            ordered.setNumberOfItems(orderedItems.size());
+            ordered.setDate(new Date());
+            log.info("Saved Order for user" + userFK + "at Time " + new Date());
+            orderedRepository.save(ordered);
+            log.warn("Delete the Shop Cart for user with id " + userFK);
+            deleteCart(userFK);
+            log.info("returend Orderd" + ordered.toString());
+            return ordered;
+        }
+        */
 }

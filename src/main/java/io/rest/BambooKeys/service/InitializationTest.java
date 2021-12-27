@@ -34,7 +34,7 @@ public class InitializationTest {
         Adress maxAdress = new Adress();
         
         maxAdress.setCity("Reutlingrn");
-        maxAdress.setCity("Reutlinger str");
+        maxAdress.setStreet("Reutlinger str");
         maxAdress.setPostCode(764312);
         
         
@@ -83,7 +83,8 @@ public class InitializationTest {
         //Cascade sorgt dafür auch, dass item abgespeichert werden
         OrderedItem orderedItem  =new OrderedItem();
        // orderedItem.setOrederedItems(cartService.getMyCart(userService.getUser(1L));
-      // cartService.checkout( cartRepository.findById(4L).get(), 1L);
+       // cartService.checkout( cartRepository.findById(4L).get(), 1L);
+       cartService.checkout(1L);
     }
 
     public void initCart(){
