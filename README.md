@@ -49,18 +49,18 @@ curl -X POST localhost:8080/checkout/1
 ## Review user order
 curl -X GET localhost:8080/ordered/1
 ## add question
-curl -X POST localhost:8080/addQuestion/1 -H'content-type:application/json' -d{"subject":"mac","descrpetion":"muller"}}'
+curl -X POST localhost:8080/addQuestion/1 -H'content-type:application/json' -d'{"subject": "nullsss","descrpetion": "dssdnull","category": 0,"user": 1}'
 ## put question 
 curl -X PUT localhost:8080/updateRequest/2 -H'content-type:application/json' -d'{}
 ## get ALL  Request From user
  curl -X GET localhost:8080/requestes/2
 ## get a specific Request From user 
-curl -X GET localhost:8080/requestes/1/3
+curl -X GET localhost:8080/requestes/1/8
 ## Delete  ALL  Request From user
 curl -X DELETE localhost:8080/deleteAllRquestFromU/1 
 ## Delete  a specific Request From user 
 curl -X DELETE localhost:8080/deleteARquestFromU/1/4
 ## swagger ui
-http://localhost:8080/swagger-ui/index.html 
+http://localhost:8080/swagger-ui.html 
 
 

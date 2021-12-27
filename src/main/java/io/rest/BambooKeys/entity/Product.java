@@ -1,11 +1,13 @@
 package io.rest.BambooKeys.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 
 import io.rest.BambooKeys.common.BaseEntity;
 
 @Entity
-public class Product extends BaseEntity<Long>{
+public class Product extends BaseEntity<Long> implements Serializable{
     
     private String productName;
     private String marke;

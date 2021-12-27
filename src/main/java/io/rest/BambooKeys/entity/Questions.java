@@ -1,20 +1,29 @@
 package io.rest.BambooKeys.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.rest.BambooKeys.common.BaseEntity;
 import io.rest.BambooKeys.enum_.Category;
 
-@Entity
-public class Questions extends BaseEntity<Long> {
+@Entity(name = "questions")
+public class Questions extends BaseEntity<Long> implements Serializable {
     
     private String subject;
     private String descrpetion;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Category category;
-
+   
+    @JsonManagedReference 
+    @JoinColumn(name = "userFK")
     @ManyToOne
     private User user;
 

@@ -65,23 +65,24 @@ public class ProductService {
     }
 
     public Product addProduct(Product product){
-        Product newProduct = productRepository.save(product);
+        Product newProduct =  productRepository.saveAndFlush(product);
         log.info("Saved user with id" + newProduct.getId());
         log.info("user saved" + newProduct.toString());
+        productRepository.saveAndFlush(newProduct);
         return newProduct;
     }
 
     public Product replaceProduct(Product newProduct, Long id){
         return productRepository.findById(id)
         .map(product -> {
-            log.info("old product" + productRepository.findById(id).get());
+            log.info("old product: " + productRepository.findById(id).get());
             product.setName(newProduct.getName());
             product.setAmount(newProduct.getAmount());
             product.setDescrpetion(newProduct.getDescrpetion());
             product.setPrice(newProduct.getPrice());
             product.setMarke(newProduct.getMarke());
            
-            log.info("replace was successful" + product.toString());
+            log.info("replace was successful: " + product.toString());
             return productRepository.save(product);
         })
         .orElseThrow( () -> new ProductException("Can not Found Product with " + id));

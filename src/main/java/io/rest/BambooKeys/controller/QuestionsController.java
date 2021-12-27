@@ -21,7 +21,8 @@ public class QuestionsController {
     @Autowired
     private QuestionsService questionsService;
 
-
+    //!!:@RequestBody is getting null values
+    //!!!!  Error: Could not write JSON:
     @PostMapping("/addQuestion/{userFK}")
     public Questions greatQuestion(@RequestBody Questions question,@PathVariable Long userFK ){
         return questionsService.AddRequest(userFK, question);
@@ -29,15 +30,15 @@ public class QuestionsController {
 
     @GetMapping("/requestes/{userFK}")
     public List<Questions> getALLReuestsFromUser(@PathVariable Long userFK){
-        return questionsService.getALLRequestFromUser(userFK);
+        return questionsService.getAllRequestFromUser(userFK);
     }
 
     @GetMapping("/requestes/{userFK}/{requestId}")
     public Optional<Questions> getAReuestsFromUser(@PathVariable Long userFK, @PathVariable Long requestId){
         return questionsService.getReuestfromUser(userFK, requestId);
     }
-
-    @PutMapping("/updateRequest")
+    //!!!!!!!!!!!!!! RequestBody is getting null values
+    @PutMapping("/updateRequest/{requestId}")
     public Questions updateRequest(@PathVariable long requestId, @RequestBody Questions nQuestion){
         return questionsService.updateReuest(nQuestion, requestId);
     }

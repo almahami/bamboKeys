@@ -1,12 +1,16 @@
 package io.rest.BambooKeys.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import org.springframework.expression.spel.ast.QualifiedIdentifier;
 
@@ -14,7 +18,7 @@ import io.rest.BambooKeys.common.BaseEntity;
 import io.rest.BambooKeys.enum_.salutation;
 
 @Entity(name = "user")
-public class User extends BaseEntity<Long> {
+public class User extends BaseEntity<Long> implements Serializable{
     
     private String firstname;
     private String lastname;
@@ -23,7 +27,8 @@ public class User extends BaseEntity<Long> {
     private Adress adress = new Adress();
     @Enumerated(EnumType.STRING)
     private salutation salutation;
-    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Questions> questions;
     
     public User() {

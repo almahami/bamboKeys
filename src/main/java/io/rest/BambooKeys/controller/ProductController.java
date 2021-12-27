@@ -41,7 +41,7 @@ public class ProductController {
         return productService.findProductWithNameAndMarke(productName, productMarke);
     }
 
-    //!!: it is send empty product to the productService and saved object with null values
+    //!!:@RequestBody is getting null values
     @PostMapping("/product")
     public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);

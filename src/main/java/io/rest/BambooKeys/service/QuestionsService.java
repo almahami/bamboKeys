@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.Questions;
+
 import io.rest.BambooKeys.exception.QuestionNotfoundException;
 import io.rest.BambooKeys.exception.UserNotfoundException;
 import io.rest.BambooKeys.repository.QuestionsRepository;
@@ -21,6 +22,7 @@ public class QuestionsService {
     @Autowired
     private UserService userService;
 
+
     public QuestionsService (Logger log){
         this.log= log;
     }
@@ -28,9 +30,9 @@ public class QuestionsService {
     public Questions AddRequest(Long userFK, Questions question){
         boolean userExisist = userService.isUserExisist(userFK);
         if(userExisist){
+            question.questionsWitUser(userService.getUser(userFK));
             return questionsRepository.save(question);
-        }
-        else{
+        }else{
             log.error("user does not exist");
             throw new UserNotfoundException("user Not found ");
         }
@@ -51,10 +53,11 @@ public class QuestionsService {
     .orElseThrow( () -> new QuestionNotfoundException(requestId));
     }
     
-    public List<Questions> getALLRequestFromUser(Long userFK){
+    public List<Questions> getAllRequestFromUser(Long userFK){
         boolean userExisist = userService.isUserExisist(userFK);
         if(userExisist){
-            return questionsRepository.findAll();
+            log.info("getALLRequestFromUser" + questionsRepository.findAllReqByUserFK(userFK));
+            return questionsRepository.findAllReqByUserFK(userFK);
         }
         else{
             log.error("user does not exist");
@@ -64,7 +67,8 @@ public class QuestionsService {
 
     public Optional<Questions> getReuestfromUser(Long userFK, Long requestId){
         boolean userExisist = userService.isUserExisist(userFK);
-        if(userExisist && ExistingRequest(requestId)){
+        if(userExisist && existingRequest(requestId) ){
+            log.info("getReuestfromUser" + questionsRepository.findById(requestId) );
             return questionsRepository.findById(requestId);
         }
         else{
@@ -87,7 +91,8 @@ public class QuestionsService {
 
     public void deleteARequestFromUSer(Long requestId, Long userFK){
         boolean userExisist = userService.isUserExisist(userFK);
-        if(userExisist && ExistingRequest(requestId)){
+        if(userExisist && existingRequest(requestId)){
+            log.warn("Delete the Rquest with id " + requestId + "From the user with" +userFK);
             questionsRepository.deleteById(requestId);
         }
         else{
@@ -96,7 +101,7 @@ public class QuestionsService {
         }
     }
 
-    public boolean ExistingRequest(Long requestId){
+    public boolean existingRequest(Long requestId){
         Optional<Questions> res = questionsRepository.findById(requestId);
         if(res.isPresent()){
             return true;

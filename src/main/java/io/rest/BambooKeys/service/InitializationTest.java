@@ -82,7 +82,7 @@ public class InitializationTest {
         //productService.deleteProduct(2L);
         //productService.deleteALLProduct();
 
-       cartService.addItemToCart(2, 1L, product.getId());
+       cartService.addItemToCart(2, 1L,2L);
         //Cascade sorgt dafür auch, dass item abgespeichert werden
         OrderedItem orderedItem  =new OrderedItem();
        // orderedItem.setOrederedItems(cartService.getMyCart(userService.getUser(1L));
@@ -122,7 +122,11 @@ public class InitializationTest {
         question1.setSubject("Defect");
         question1.questionsWitUser(user);
         questionsService.AddRequest(1L, questions);
-        questionsService.updateReuest(question1, 6L);
-        
+        questionsService.updateReuest(question1, 8L);
+        questionsService.existingRequest(8L);
+        questionsService.getAllRequestFromUser(1L);
+        questionsService.getReuestfromUser(1L, 8L);
+       // questionsService.deleteARequestFromUSer(8L, 1L);
+        //questionsService.deleteAllUserRequest(1L);
     }
 }
