@@ -40,6 +40,7 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON)
     @PutMapping("user/{id}")
     public User updateUser(@PathVariable Long id , @RequestBody User user){
         return userService.replacUser(user, id);

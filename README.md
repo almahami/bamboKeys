@@ -1,6 +1,3 @@
-## h2 config in build.gradle 
-## mariaDB
-runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 ## get all users
 curl localhost:8080/users
 ## get user with id 1
