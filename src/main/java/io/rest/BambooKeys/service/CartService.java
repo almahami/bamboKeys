@@ -111,7 +111,7 @@ public class CartService {
                     throw new ProductException("the quantity should be >=1");
                 }
             } else {
-                log.info("Product with id: " + productFK + " not Founded");
+                log.error("Product with id: " + productFK + " not Founded");
                 throw new ProductException("Product with id: " + productFK + " not Founded");
             }
         } else {

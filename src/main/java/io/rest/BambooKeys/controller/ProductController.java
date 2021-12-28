@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.service.ProductService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class ProductController {

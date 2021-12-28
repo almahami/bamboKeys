@@ -1,11 +1,14 @@
 package io.rest.BambooKeys.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.Adress;
 import io.rest.BambooKeys.entity.OrderedItem;
 import io.rest.BambooKeys.entity.Product;
+import io.rest.BambooKeys.entity.ProductReview;
 import io.rest.BambooKeys.entity.Questions;
 import io.rest.BambooKeys.entity.User;
 import io.rest.BambooKeys.enum_.Category;
@@ -27,6 +30,8 @@ public class InitializationTest {
     private OrderedService orderedService;
     @Autowired
     private QuestionsService questionsService;
+    @Autowired
+    private ProductReviewService productReviewService;
 
 
     public void initUserDB(){
@@ -128,5 +133,45 @@ public class InitializationTest {
         questionsService.getRequestfromUser(1L, 8L);
        // questionsService.deleteARequestFromUSer(8L, 1L);
         //questionsService.deleteAllUserRequest(1L);
+    }
+
+    @Transactional
+    public void initReviw(){
+        User  user = new User();
+        user.setLastname("Mueller");
+        user.setFirstname("max");
+        user.setE_mail("max_mueller@gmail.com");
+        user.setSalutation(salutation.Mister);
+        
+        Adress maxAdress = new Adress();
+        
+        maxAdress.setCity("Reutlingrn");
+        maxAdress.setStreet("Reutlinger str");
+        maxAdress.setPostCode(764312);
+       user.setAdress(maxAdress);
+        userService.addUser(user);
+
+        Product product = new Product();
+
+        product.setName("name");
+        product.setMarke("marke");
+        product.setAmount(10);
+        product.setDescrpetion("descrpetion");
+        product.setPrice(100);
+        
+        productService.addProduct(product);
+        
+        ProductReview productReview= new ProductReview();
+        productReview.setStar_rating("5");
+        productReview.setText("text");
+        productReview.setPublishers(user);
+       // product.setProductReview(productReview);
+        //user.addProductReview(productReview);
+        userService.addUser(user);
+        productService.addProduct(product);
+        System.out.println("***********User********"+ userService.isUserExisist(user.getId()));
+        System.out.println("*****************product*******" + productService.exsistingProduct(product.getId()));
+        //productReviewService.addProductReview(productReview, user.getId(), product.getId());
+       
     }
 }

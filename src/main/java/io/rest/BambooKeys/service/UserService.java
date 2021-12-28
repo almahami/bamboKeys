@@ -103,7 +103,9 @@ public class UserService {
         if(res.isPresent()){
             return true;
         }else{
-            return false;
+            
+            throw new UserNotfoundException(userFK);
+            
         }
     }
 }

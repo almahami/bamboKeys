@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.rest.BambooKeys.entity.Questions;
 import io.rest.BambooKeys.service.QuestionsService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 public class QuestionsController {
@@ -21,8 +22,9 @@ public class QuestionsController {
     @Autowired
     private QuestionsService questionsService;
 
-    //!!:@RequestBody is getting null values
+    //!!
     //!!!!  Error: Could not write JSON:
+    //@RequestMapping(method = RequestMetho.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping("/addQuestion/{userFK}")
     public Questions greatQuestion(@RequestBody Questions question,@PathVariable Long userFK ){
         return questionsService.AddRequest(userFK, question);

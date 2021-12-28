@@ -5,6 +5,9 @@ public class ProductException extends RuntimeException {
     public ProductException() {
     }
 
+    public ProductException(Long productId) {
+        super("COULD NOT FOUND THE PRODUCT WITH ID" + productId);
+    }
     public ProductException(String message) {
         super(message);
     }

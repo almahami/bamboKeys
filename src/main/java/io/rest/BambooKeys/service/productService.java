@@ -31,7 +31,7 @@ public class ProductService {
         List<Product> res = productRepository.findByProductName(productName);
 
         if(res.isEmpty()){
-            log.info("Product: " + productName +" not Found");
+            log.error("Product: " + productName +" not Found");
             throw new ProductException("Can not found any Product with name: " + productName);
         }
         else{
@@ -43,7 +43,7 @@ public class ProductService {
         Optional<Product> res = productRepository.findByproductNameAndMarke(productName, productMarke);
 
         if(res.isEmpty()){
-            log.info("Product: " + productName + "Marke: " + productMarke +" not Found");
+            log.error("Product: " + productName + "Marke: " + productMarke +" not Found");
             throw new ProductException("Can not found any Product with name:  " + productName + ", Marke:"  + productMarke);
         }
         else{
@@ -93,7 +93,7 @@ public class ProductService {
 
         Optional<Product> result= productRepository.findById(id);
         if(result.isEmpty()){
-            log.warn(("can not Found Product with " + id));
+            log.error(("can not Found Product with " + id));
             throw new ProductException("can not Found Product with id: " + id);
         }
         else{
@@ -108,5 +108,17 @@ public class ProductService {
         if (result.isEmpty()) throw new ProductException("does not  Found any Product");
         log.warn("Delete ALL Product!!! ");
         productRepository.deleteAll();
+    }
+
+    public boolean exsistingProduct(Long productFK ){
+        Optional<Product> productRes = productRepository.findById(productFK);
+        if(productRes.isPresent()){
+            log.info("Product exisit in DB");
+            return true;
+        }else{
+            log.error("product not Found");
+            throw new ProductException(productFK);
+            
+        }
     }
 }
