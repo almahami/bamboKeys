@@ -125,7 +125,7 @@ public class InitializationTest {
         questionsService.updateReuest(question1, 8L);
         questionsService.existingRequest(8L);
         questionsService.getAllRequestFromUser(1L);
-        questionsService.getReuestfromUser(1L, 8L);
+        questionsService.getRequestfromUser(1L, 8L);
        // questionsService.deleteARequestFromUSer(8L, 1L);
         //questionsService.deleteAllUserRequest(1L);
     }

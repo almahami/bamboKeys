@@ -65,10 +65,10 @@ public class QuestionsService {
         }
     }
 
-    public Optional<Questions> getReuestfromUser(Long userFK, Long requestId){
+    public Optional<Questions> getRequestfromUser(Long userFK, Long requestId){
         boolean userExisist = userService.isUserExisist(userFK);
         if(userExisist && existingRequest(requestId) ){
-            log.info("getReuestfromUser" + questionsRepository.findById(requestId) );
+            log.info("getRequestfromUser" + questionsRepository.findById(requestId) );
             return questionsRepository.findById(requestId);
         }
         else{

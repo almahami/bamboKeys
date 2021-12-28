@@ -35,7 +35,7 @@ public class QuestionsController {
 
     @GetMapping("/requestes/{userFK}/{requestId}")
     public Optional<Questions> getAReuestsFromUser(@PathVariable Long userFK, @PathVariable Long requestId){
-        return questionsService.getReuestfromUser(userFK, requestId);
+        return questionsService.getRequestfromUser(userFK, requestId);
     }
     //!!!!!!!!!!!!!! RequestBody is getting null values
     @PutMapping("/updateRequest/{requestId}")
