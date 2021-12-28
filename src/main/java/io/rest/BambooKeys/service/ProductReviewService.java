@@ -27,7 +27,6 @@ public class ProductReviewService {
     public ProductReview addProductReview(ProductReview productReview, Long productFK, Long userFK){
         if(userService.isUserExisist(userFK) && productService.exsistingProduct(productFK)){
             log.info("the user with id: " + userFK + "add Reviw for the Product: " + productFK + "Reviw:::" + productReview.toString());
-            //return productReviewRepository.save(new ProductReview(productReview.getPublishers(), productReview.getStar_rating(), productReview.getText()));
             return  productReviewRepository.save(productReview);
         }
         return  null;

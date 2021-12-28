@@ -23,10 +23,6 @@ public class ProductReviewController {
     //!!! Getting null values
     @PostMapping("/addReviw/{userFK}/{productFK}")
     public ProductReview addProductReview(@RequestBody ProductReview productReview, @PathVariable Long userFK, @PathVariable Long productFK){
-        //ProductReview pr  = new ProductReview();
-        //pr.setStar_rating(productReview.getStar_rating());
-        //pr.setText(productReview.getText());
-        
         return productReviewService.addProductReview(productReview, productFK, userFK);
     }
 
