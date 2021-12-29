@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.rest.BambooKeys.entity.ProductReview;
+import io.rest.BambooKeys.exception.ProductReviewExcpetion;
 import io.rest.BambooKeys.repository.ProductReviewRepository;
 
 @Service
@@ -26,6 +27,8 @@ public class ProductReviewService {
 
     public ProductReview addProductReview(ProductReview productReview, Long productFK, Long userFK){
         if(userService.isUserExisist(userFK) && productService.exsistingProduct(productFK)){
+            productReview.setPublishers(userService.getUser(userFK));
+            productReview.setProduct(productService.getProduct(productFK));
             log.info("the user with id: " + userFK + "add Reviw for the Product: " + productFK + "Reviw:::" + productReview.toString());
             return  productReviewRepository.save(productReview);
         }
@@ -60,10 +63,11 @@ public class ProductReviewService {
             log.info("old review" + productReviewRepository.findById(reviewId).get());
             productReview.setText(nproductReview.getText());
             productReview.setDate(new Date());
+            productReview.setStar_rating(nproductReview.getStar_rating());
             return productReviewRepository.save(productReview);
     })
     
-    .orElseThrow( () -> new RuntimeException("THE REVIEW DOES NOT FOUND; ID " + reviewId));
+    .orElseThrow( () -> new ProductReviewExcpetion(reviewId));
     }
     
 }

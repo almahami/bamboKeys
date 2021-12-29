@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.rest.BambooKeys.common.BaseEntity;
 
@@ -17,8 +19,9 @@ public class Product extends BaseEntity<Long> implements Serializable{
     private String descrpetion;
     private double price;
     private int amount;
-    @JoinColumn(name = "productFK")
-    @OneToMany
+    //@JsonManagedReference 
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
     private List<ProductReview> productReviews;
 
     public Product() {

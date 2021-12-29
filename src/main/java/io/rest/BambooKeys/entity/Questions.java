@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.rest.BambooKeys.common.BaseEntity;
@@ -22,8 +23,9 @@ public class Questions extends BaseEntity<Long> implements Serializable {
     @Enumerated(EnumType.STRING)
     private Category category;
    
-    @JsonManagedReference 
-    @JoinColumn(name = "userFK")
+   // @JsonManagedReference 
+   @JsonIgnore 
+   @JoinColumn(name = "userFK")
     @ManyToOne
     private User user;
 

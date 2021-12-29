@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -15,11 +16,15 @@ import io.rest.BambooKeys.common.BaseEntity;
 @Entity(name = "productReview")
 public class ProductReview extends BaseEntity<Long> {
   
+    //@JsonManagedReference 
     @JsonIgnore
-    @JsonManagedReference 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "userFK")
     private User publishers;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "productFK")
+    private Product product;
     private String star_rating;
     private Date date;
     private String text;
@@ -58,6 +63,13 @@ public class ProductReview extends BaseEntity<Long> {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

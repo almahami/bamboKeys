@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.rest.BambooKeys.common.BaseEntity;
 import io.rest.BambooKeys.enum_.salutation;
@@ -27,10 +27,12 @@ public class User extends BaseEntity<Long> implements Serializable{
     private Adress adress = new Adress();
     @Enumerated(EnumType.STRING)
     private salutation salutation;
-    @JsonBackReference
+    // @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Questions> questions;
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "publishers")
     private List<ProductReview> productReviews;
     public User() {
