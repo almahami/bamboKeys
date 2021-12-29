@@ -41,7 +41,10 @@ public class ProductController {
         return productService.findProductWithNameAndMarke(productName, productMarke);
     }
 
-    //!!:@RequestBody is getting null values
+    //!!: JSON parse error: null; nested exception is com.fasterxml.jackson.databind.
+    //!!JsonMappingException: N/A
+    //!!!at [Source: (PushbackInputStream); 
+    //!!reference chain: io.rest.BambooKeys.entity.Product["productReview"])]
     @PostMapping("/product")
     public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);

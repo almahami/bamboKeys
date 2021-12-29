@@ -3,11 +3,12 @@ package io.rest.BambooKeys.entity;
 import java.io.Serializable;
 import java.util.List;
 
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.rest.BambooKeys.common.BaseEntity;
 
@@ -19,9 +20,9 @@ public class Product extends BaseEntity<Long> implements Serializable{
     private String descrpetion;
     private double price;
     private int amount;
-    //@JsonManagedReference 
+    //@JsonBackReference 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "productFK")
     private List<ProductReview> productReviews;
 
     public Product() {

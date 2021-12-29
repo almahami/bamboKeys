@@ -28,6 +28,7 @@ public class OrderedItemService {
     public void saveOrderedItem(Long userFK, OrderedItem orderedItem){
         Optional<User> res = userRepository.findById(userFK);
         if(res.isPresent()){
+            log.info("save ordered Item" + orderedItem.toString());
             orderdItemRepository.save(orderedItem);
         }
         else{
