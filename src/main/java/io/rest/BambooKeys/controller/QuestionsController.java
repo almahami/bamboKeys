@@ -15,7 +15,8 @@ import io.rest.BambooKeys.entity.Questions;
 import io.rest.BambooKeys.service.QuestionsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.MediaType;
 @RestController
 public class QuestionsController {
     
@@ -24,7 +25,7 @@ public class QuestionsController {
 
     //!!
     //!!!!  Error: Could not write JSON:
-    //@RequestMapping(method = RequestMetho.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    //@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     @PostMapping("/addQuestion/{userFK}")
     public Questions greatQuestion(@RequestBody Questions question,@PathVariable Long userFK ){
         return questionsService.AddRequest(userFK, question);
@@ -39,7 +40,7 @@ public class QuestionsController {
     public Optional<Questions> getAReuestsFromUser(@PathVariable Long userFK, @PathVariable Long requestId){
         return questionsService.getRequestfromUser(userFK, requestId);
     }
-    //!!!!!!!!!!!!!! RequestBody is getting null values
+   
     @PutMapping("/updateRequest/{requestId}")
     public Questions updateRequest(@PathVariable long requestId, @RequestBody Questions nQuestion){
         return questionsService.updateReuest(nQuestion, requestId);
