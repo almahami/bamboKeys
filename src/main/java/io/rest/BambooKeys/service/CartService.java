@@ -43,6 +43,7 @@ public class CartService {
     }
 
     public List<Cart> getMyCart(Long userFK) {
+        
         List<Cart> res = cartRepository.findCartByUserFK(userFK);
         if (!res.isEmpty()) {
             return cartRepository.findCartByUserFK(userFK);
