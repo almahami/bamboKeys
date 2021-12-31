@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.rest.BambooKeys.entity.Product;
 import io.rest.BambooKeys.service.ProductService;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
 
 @RestController
 public class ProductController {
@@ -22,12 +23,14 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public List<Product> getProducts(){
+    public List<Product> getProducts(Model model){
+        model.addAttribute("listProducts", productService.getProducts());
         return productService.getProducts();
     }
 
     @GetMapping("/product/{id}")
-    public Product getProduct(@PathVariable Long id){
+    public Product getProduct(@PathVariable Long id, Model model){
+        model.addAttribute("productDeteis", productService.getProduct(id));
         return productService.getProduct(id);
     }
 
@@ -37,7 +40,8 @@ public class ProductController {
     }
 
     @GetMapping("/productWithNameAndMarke/{productName}/{productMarke}")
-    public Optional<Product> getproductWithNameAndMarke(@PathVariable String productName, @PathVariable String productMarke){
+    public Optional<Product> getproductWithNameAndMarke(@PathVariable String productName, @PathVariable String productMarke, Model model){
+        model.addAttribute("searchResult", productService.findProductWithNameAndMarke(productName, productMarke));
         return productService.findProductWithNameAndMarke(productName, productMarke);
     }
 
