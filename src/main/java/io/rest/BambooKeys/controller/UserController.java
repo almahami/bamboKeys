@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.rest.BambooKeys.entity.User;
+import io.rest.BambooKeys.service.CreatingJSONDocument;
 import io.rest.BambooKeys.service.UserService;
 
 
@@ -20,6 +21,8 @@ public class UserController {
     
     @Autowired
     private UserService userService;
+    @Autowired 
+    private CreatingJSONDocument creatingJSONDocument; 
 
     @GetMapping("/users")
     public List<User> getUsers(){
@@ -38,6 +41,7 @@ public class UserController {
 
     @PostMapping("/user")
     public User addUser(@RequestBody User user){
+        creatingJSONDocument.overWriteToJsonFile("user", userService.addUser(user), "output.json");
         return userService.addUser(user);
     }
 
